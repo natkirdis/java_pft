@@ -7,7 +7,7 @@ public class MyFirstProgram {
     hello("Alexei");
 
     Square s = new Square(5.0);
-    System.out.println("Площадь квадрата со стороной" + s.l + " = " + s.area());
+    System.out.println("Площадь квадрата со стороной " + s.l + " = " + s.area());
 
     Rectangle r = new Rectangle(4.0, 6.0);
     System.out.println("Площадь прямоугольника со сторонами " + r.a + " " + r.b + " = " + r.area());
