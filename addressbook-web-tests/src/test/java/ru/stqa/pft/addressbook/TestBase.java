@@ -95,4 +95,34 @@ public class TestBase {
   protected void selectGroup() {
     wd.findElement(By.name("selected[]")).click();
   }
+
+  protected void returnToContactPage() {
+    wd.findElement(By.linkText("home page")).click();
+  }
+
+  protected void submitContractCreation() {
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  protected void fillContactForm(ContactData contactData) {
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys(contactData.getName());
+    wd.findElement(By.name("middlename")).click();
+    wd.findElement(By.name("middlename")).clear();
+    wd.findElement(By.name("middlename")).sendKeys(contactData.getMiddleName());
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys(contactData.getLastName());
+    wd.findElement(By.name("mobile")).click();
+    wd.findElement(By.name("mobile")).clear();
+    wd.findElement(By.name("mobile")).sendKeys(contactData.getPhoneNumber());
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+  }
+
+  protected void initContactCreation() {
+    wd.findElement(By.linkText("add new")).click();
+  }
 }
