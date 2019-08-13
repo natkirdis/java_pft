@@ -57,10 +57,6 @@ public class ApplicationManager {
     }
   }
 
-  public void returnToContactPage() {
-    wd.findElement(By.linkText("home page")).click();
-  }
-
   public GroupHelper getGroupHelper() {
     return groupHelper;
   }
