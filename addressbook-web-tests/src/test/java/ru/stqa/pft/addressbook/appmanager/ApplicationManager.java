@@ -11,29 +11,21 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
   public FirefoxDriver wd;
 
+  // создаем ссылку на класс
+  private SessionHelper sessionHelper;
+  private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
 
   public void init() {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/group.php");
+    // инициализируем в методе init, который вызывается перед тестами
     groupHelper = new GroupHelper(wd);
-    login("admin", "secret");
-  }
-
-  public void login(String username, String password) {
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.id("LoginForm")).click();
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-  }
-
-  public void gotoGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    navigationHelper = new NavigationHelper(wd);
+    sessionHelper = new SessionHelper(wd);
+    // обращаемся через помощник
+    sessionHelper.login("admin", "secret");
   }
 
   public void stop() {
@@ -94,5 +86,9 @@ public class ApplicationManager {
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
   }
 }
