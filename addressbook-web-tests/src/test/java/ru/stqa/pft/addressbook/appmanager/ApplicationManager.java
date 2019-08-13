@@ -35,10 +35,6 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public void logout() {
-    wd.findElement(By.linkText("Logout")).click();
-  }
-
   public boolean isElementPresent(By by) {
     try {
       wd.findElement(by);
@@ -57,15 +53,17 @@ public class ApplicationManager {
     }
   }
 
+  // геттеры
   public GroupHelper getGroupHelper() {
     return groupHelper;
   }
-
   public NavigationHelper getNavigationHelper() {
     return navigationHelper;
   }
-
   public ContactHelper getContactHelper() {
     return contactHelper;
+  }
+  public SessionHelper getSessionHelper() {
+    return sessionHelper;
   }
 }
