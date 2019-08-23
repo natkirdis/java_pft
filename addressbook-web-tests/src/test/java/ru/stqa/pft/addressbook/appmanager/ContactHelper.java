@@ -71,8 +71,4 @@ public class ContactHelper extends HelperBase {
     fillContactForm(contact, true);
     submitContractCreation();
   }
-
-  public int getGroupCount() {
-    return wd.findElements(By.name("selected[]")).size();
-  }
 }
