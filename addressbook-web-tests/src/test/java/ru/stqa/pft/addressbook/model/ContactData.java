@@ -3,15 +3,16 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
+
+  private int id;
   private final String name;
-  private final String id;
   private final String middleName;
   private final String lastName;
   private final String phoneNumber;
   private final String email;
   private String group;
 
-  public ContactData(String id, String name, String middleName, String lastName, String phoneNumber, String email, String group) {
+  public ContactData(int id, String name, String middleName, String lastName, String phoneNumber, String email, String group) {
     this.id = id;
     this.name = name;
     this.middleName = middleName;
@@ -22,7 +23,7 @@ public class ContactData {
   }
 
   public ContactData(String name, String middleName, String lastName, String phoneNumber, String email, String group) {
-    this.id = null;
+    this.id = 0;
     this.name = name;
     this.middleName = middleName;
     this.lastName = lastName;
@@ -31,7 +32,7 @@ public class ContactData {
     this.group = group;
   }
 
-  public String getId() {
+  public int getId() {
     return id;
   }
 
@@ -59,6 +60,10 @@ public class ContactData {
     return group;
   }
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -67,19 +72,18 @@ public class ContactData {
             ", lastName='" + lastName + '\'' +
             '}';
   }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return Objects.equals(name, that.name) &&
-            Objects.equals(id, that.id) &&
+    return id == that.id &&
+            Objects.equals(name, that.name) &&
             Objects.equals(lastName, that.lastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, id, lastName);
+    return Objects.hash(id, name, lastName);
   }
 }
