@@ -23,7 +23,7 @@ public class ContactData {
   }
 
   public ContactData(String name, String middleName, String lastName, String phoneNumber, String email, String group) {
-    this.id = 0;
+    this.id = Integer.MAX_VALUE;
     this.name = name;
     this.middleName = middleName;
     this.lastName = lastName;
@@ -72,18 +72,18 @@ public class ContactData {
             ", lastName='" + lastName + '\'' +
             '}';
   }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(name, that.name) &&
+    return Objects.equals(name, that.name) &&
             Objects.equals(lastName, that.lastName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, lastName);
+    return Objects.hash(name, lastName);
   }
 }
