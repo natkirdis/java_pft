@@ -12,7 +12,6 @@ public class ApplicationManager {
 
   public WebDriver wd;
 
-   // создаем ссылку на класс
   private SessionHelper sessionHelper;
   private NavigationHelper navigationHelper;
   private GroupHelper groupHelper;
@@ -50,15 +49,18 @@ public class ApplicationManager {
   }
 
   // геттеры
-  public GroupHelper getGroupHelper() {
+  public GroupHelper group() {
     return groupHelper;
   }
-  public NavigationHelper getNavigationHelper() {
+
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
+
   public ContactHelper getContactHelper() {
     return contactHelper;
   }
+
   public SessionHelper getSessionHelper() {
     return sessionHelper;
   }
