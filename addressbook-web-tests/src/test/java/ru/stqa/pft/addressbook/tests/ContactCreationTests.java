@@ -8,7 +8,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class ContactCreationTests extends TestBase {
-
   @Test
   public void testContactCreation() throws Exception {
     app.goTo().gotoContactPage();

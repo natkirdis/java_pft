@@ -76,6 +76,8 @@ public class ContactHelper extends HelperBase {
     submitContractCreation();
   }
 
+
+
   public int getContactCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
@@ -91,5 +93,12 @@ public class ContactHelper extends HelperBase {
       contacts.add(contact);
     }
     return contacts;
+  }
+
+  public void modifyContact(int index, ContactData contact) {
+    initContactModification(index);
+    fillContactForm(contact, false);
+    submitContactModification();
+    returnToContactPage();
   }
 }
