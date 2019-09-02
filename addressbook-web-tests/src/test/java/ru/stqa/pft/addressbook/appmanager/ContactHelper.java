@@ -84,7 +84,7 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("input[id = '" + id + "']")).click();
   }
 
-  public int getContactCount() {
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
