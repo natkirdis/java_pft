@@ -12,7 +12,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() throws Exception {
     app.goTo().сontactPage();
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withName("test name").withMiddleName("test middle name").withLastName("test last name").withPhoneNumber("89993424433").withEmail("test@email.ru").withGroup("test1");
+    ContactData contact = new ContactData().withFirstName("test name").withMiddleName("test middle name").withLastName("test last name").withHomePhone("89993424433").withEmail("test@email.ru").withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().сontactPage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
@@ -25,7 +25,7 @@ public class ContactCreationTests extends TestBase {
   public void testBadContactCreation() throws Exception {
     app.goTo().сontactPage();
     Contacts before = app.contact().all();
-    ContactData contact = new ContactData().withName("test' name").withMiddleName("test middle name").withLastName("test last name").withPhoneNumber("89993424433").withEmail("test@email.ru").withGroup("test1");
+    ContactData contact = new ContactData().withFirstName("test' name").withMiddleName("test middle name").withLastName("test last name").withHomePhone("89993424433").withEmail("test@email.ru").withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().сontactPage();
     assertThat(app.contact().count(), equalTo(before.size()));

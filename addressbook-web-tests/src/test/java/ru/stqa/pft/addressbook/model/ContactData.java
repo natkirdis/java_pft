@@ -5,6 +5,14 @@ import java.util.Objects;
 public class ContactData {
 
   private int id = Integer.MAX_VALUE;
+  private String name;
+  private String middleName;
+  private String lastName;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
+  private String email;
+  private String group;
 
   @Override
   public boolean equals(Object o) {
@@ -20,13 +28,6 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, name, lastName);
   }
-
-  private String name;
-  private String middleName;
-  private String lastName;
-  private String phoneNumber;
-  private String email;
-  private String group;
 
   public int getId() {
     return id;
@@ -44,8 +45,16 @@ public class ContactData {
     return lastName;
   }
 
-  public String getPhoneNumber() {
-    return phoneNumber;
+  public String getHomePhone() {
+    return homePhone;
+  }
+
+  public String getMobilePhone() {
+    return mobilePhone;
+  }
+
+  public String getWorkPhone() {
+    return mobilePhone;
   }
 
   public String getEmail() {
@@ -61,7 +70,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withName(String name) {
+  public ContactData withFirstName(String name) {
     this.name = name;
     return this;
   }
@@ -76,8 +85,18 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
     return this;
   }
 
