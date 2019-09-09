@@ -49,23 +49,23 @@ public class ContactDataGenerator {
 
 
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-    Writer writer = new FileWriter(file);
-    for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s;%s,%s,%s,%s,%s,%s,%s,%s\n",
-              contact.getName(), contact.getMiddleName(), contact.getLastName(),
-              contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
-              contact.getEmail(), contact.getEmail1(), contact.getEmail2(),
-              contact.getAddress()));
+    try (Writer writer = new FileWriter(file)) {
+      for (ContactData contact : contacts) {
+        writer.write(String.format("%s;%s;%s,%s,%s,%s,%s,%s,%s,%s\n",
+                contact.getName(), contact.getMiddleName(), contact.getLastName(),
+                contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(),
+                contact.getEmail(), contact.getEmail1(), contact.getEmail2(),
+                contact.getAddress()));
+      }
     }
-    writer.close();
   }
 
   private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
     XStream xstream = new XStream();
     String xml = xstream.toXML(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(xml);
+    }
   }
 
   private List<ContactData> generateContacts(int count) {
