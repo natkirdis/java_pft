@@ -60,8 +60,7 @@ public class ContactData {
   @Transient
   private String group;
 
-  @Column(name = "photo")
-  @Type(type = "text")
+  @Transient
   private String photo;
 
 
@@ -119,6 +118,46 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", name='" + name + '\'' +
+            ", middleName='" + middleName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
+            ", address='" + address + '\'' +
+            ", email='" + email + '\'' +
+            ", email1='" + email1 + '\'' +
+            ", email2='" + email2 + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id &&
+            Objects.equals(name, that.name) &&
+            Objects.equals(middleName, that.middleName) &&
+            Objects.equals(lastName, that.lastName) &&
+            Objects.equals(homePhone, that.homePhone) &&
+            Objects.equals(mobilePhone, that.mobilePhone) &&
+            Objects.equals(workPhone, that.workPhone) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(email, that.email) &&
+            Objects.equals(email1, that.email1) &&
+            Objects.equals(email2, that.email2);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, middleName, lastName, homePhone, mobilePhone, workPhone, address, email, email1, email2);
   }
 
   public File getPhoto() {
@@ -200,30 +239,6 @@ public class ContactData {
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
     return this;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "name='" + name + '\'' +
-            ", id='" + id + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(name, that.name) &&
-            Objects.equals(lastName, that.lastName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, name, lastName);
   }
 
 }

@@ -29,19 +29,18 @@ public class ContactCreationTests extends TestBase {
       }
       XStream xstream = new XStream();
       xstream.processAnnotations(ContactData.class);
-      List<ContactData> groups = (List<ContactData>) xstream.fromXML(xml);
-      return groups.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
+      List<ContactData> contacts = (List<ContactData>) xstream.fromXML(xml);
+      return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test(dataProvider = "validContactsFromXml")
   public void testContactCreation(ContactData contact) throws Exception {
-    app.goTo().сontactPage();
-    Contacts before = app.contact().all();
+    Contacts before = app.db().contacts();
     app.contact().create(contact, true);
     app.goTo().сontactPage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    Contacts after = app.db().contacts();
     assertThat(after, equalTo(
             before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
@@ -49,14 +48,12 @@ public class ContactCreationTests extends TestBase {
   @Test(enabled = false)
   public void testBadContactCreation() throws Exception {
     app.goTo().сontactPage();
-    Contacts before = app.contact().all();
+    Contacts before =  app.db().contacts();
     ContactData contact = new ContactData().withFirstName("test' name").withMiddleName("test middle name").withLastName("test last name").withHomePhone("89993424433").withEmail("test@email.ru").withGroup("test1");
     app.contact().create(contact, true);
     app.goTo().сontactPage();
     assertThat(app.contact().count(), equalTo(before.size()));
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo(
-            before));
+    Contacts after =  app.db().contacts();
+    assertThat(after, equalTo(before));
   }
-
 }

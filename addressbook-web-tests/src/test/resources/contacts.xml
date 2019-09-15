@@ -8,6 +8,7 @@
     <mobilePhone>8(900)-000-00-00</mobilePhone>
     <workPhone>100-00-00</workPhone>
     <address>test address0</address>
+    <email>test0@mail.ru</email>
     <email1>test0@gmail.com</email1>
     <email2>test0@yandex.ru</email2>
   </ru.stqa.pft.addressbook.model.ContactData>
@@ -20,6 +21,7 @@
     <mobilePhone>8(900)-000-00-01</mobilePhone>
     <workPhone>100-00-01</workPhone>
     <address>test address1</address>
+    <email>test1@mail.ru</email>
     <email1>test1@gmail.com</email1>
     <email2>test1@yandex.ru</email2>
   </ru.stqa.pft.addressbook.model.ContactData>
@@ -32,6 +34,7 @@
     <mobilePhone>8(900)-000-00-02</mobilePhone>
     <workPhone>100-00-02</workPhone>
     <address>test address2</address>
+    <email>test2@mail.ru</email>
     <email1>test2@gmail.com</email1>
     <email2>test2@yandex.ru</email2>
   </ru.stqa.pft.addressbook.model.ContactData>
