@@ -12,7 +12,7 @@ public class DbConnectionTest {
   public void testDbConnection() {
     Connection conn = null;
     try {
-      conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?user=root&password=&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+      conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/addressbook?user=root&password=");
 
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery("SELECT group_id, group_name, group_header, group_footer  FROM group_list");
