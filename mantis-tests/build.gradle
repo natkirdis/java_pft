@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+
+compileJava.options.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.testng:testng:7.0.0-beta7'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-2'
+    implementation 'org.hamcrest:hamcrest:2.1'
+}
+
+task {
+    useTestNG {
+        suites 'src/test/resources/testng-groups.xml'
+    }
+    if (project.hasProperty('browser')) {
+        systemProperty('browser', "${browser}")
+    }
+    if (project.hasProperty('target')) {
+        systemProperty('target', "${target}")
+    }
+
+    if (project.hasProperty('verifyUI')) {
+        systemProperty('verifyUI', "${verifyUI}")
+    }
+}
+
+test {
+    useTestNG()
+}
