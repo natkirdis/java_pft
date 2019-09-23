@@ -10,7 +10,7 @@ import java.io.File;
 public class TestBase {
 
   protected static ApplicationManager app
-          = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
+          = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
   //(BrowserType.CHROME);
 
   @BeforeSuite(alwaysRun = true)
