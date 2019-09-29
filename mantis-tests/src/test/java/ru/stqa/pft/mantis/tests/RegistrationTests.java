@@ -20,7 +20,7 @@ public class RegistrationTests extends TestBase {
     long now = System.currentTimeMillis();
     String user = String.format("user%s", now);
     String password = "password";
-    String email = String.format("user%s@localhost.localdomain", now);
+    String email = String.format("user%s@localhost", now);
     app.james().createUser(user, password); //Создаем юзера на почтовом сервере james
     app.registration().start(user, email);
     //List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000); //Ждем два письма в течении 10 секунд. 1 - пользователю, 2 - админу;
@@ -37,7 +37,7 @@ public class RegistrationTests extends TestBase {
     return regex.getText(mailMessage.text);
   }
 
- // @AfterMethod(alwaysRun = true) //остановка втроенного почтового сервера
+  //@AfterMethod(alwaysRun = true) //остановка втроенного почтового сервера
   public void stopMailServer() {
     app.mail().stop();
   }
