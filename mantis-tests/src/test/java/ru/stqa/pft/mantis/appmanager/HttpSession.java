@@ -1,5 +1,7 @@
 package ru.stqa.pft.mantis.appmanager;
 
+
+import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,50 +16,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class HttpSession {
-  private CloseableHttpClient httpClient;
+  private CloseableHttpClient httpclient;
   private ApplicationManager app;
 
   public HttpSession(ApplicationManager app) {
     this.app = app;
-    // создается новый клиент (сессия работы по протоколу http). Объект, который будет отправлять запросы на сервер.
-    // setRedirectStrategy - создается стратегия перенаправлений. Без нее получим ответ 302. Должны будем его обрабатывать
-    // LaxRedirectStrategy - сам обрабатывает перенаправления
-
-
-    httpClient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
+    httpclient = HttpClients.custom().setRedirectStrategy(new LaxRedirectStrategy()).build();
   }
 
-
-  // Умеет выполнять логин
-  public boolean login(String username, String password) throws Exception {
-
+  public boolean login(String username, String password) throws IOException {
     HttpPost post = new HttpPost(app.getProperty("web.baseUrl") + "/login.php");
-
-    // Формируется набор параметров
-    List<BasicNameValuePair> params = new ArrayList<>();
+    List<NameValuePair> params = new ArrayList<>();
     params.add(new BasicNameValuePair("username", username));
     params.add(new BasicNameValuePair("password", password));
     params.add(new BasicNameValuePair("secure_session", "on"));
     params.add(new BasicNameValuePair("return", "index.php"));
-
-    // Параметры упаковываются и складываются в заранее созданный запрос setEntity
     post.setEntity(new UrlEncodedFormEntity(params));
-
-    // Отправка запроса. Результат - ответ
-    CloseableHttpResponse response = httpClient.execute(post);
-
-
-
-    // Отправка запроса. Обрабатываем ответ
-    String body = geTextFrom(response);
-
-    // Проверяем, что пользователь вошел. Код страницы содерижит строчку, к содержит имя пользователя.
-    return body.contains(String.format("<a href=\"/mantisbt-2.22.0/account_page.php\">%s</a>", username));
+    CloseableHttpResponse response = httpclient.execute(post);
+    String body = getTextFrom(response);
+//    System.out.println(body);
+    return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
 
-  private String geTextFrom(CloseableHttpResponse response) throws IOException {
+  private String getTextFrom(CloseableHttpResponse response) throws IOException {
     try {
       return EntityUtils.toString(response.getEntity());
     } finally {
@@ -65,17 +47,10 @@ public class HttpSession {
     }
   }
 
-  // Определяет какой пользователь залогинен
   public boolean isLoggedInAs(String username) throws IOException {
-    // сформировали запрос
-    HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
-    // Отправили запрос -> получили ответ
-    CloseableHttpResponse response = httpClient.execute(get);
-    String body = geTextFrom(response);
-
-    // Проверяем, что в тексте страницы содержится нужный текст
-    return body.contains(String.format("<a href=\"/mantisbt-2.22.0/account_page.php\">%s</a>", username));
+    HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/account_page.php");
+    CloseableHttpResponse response = httpclient.execute(get);
+    String body = getTextFrom(response);
+    return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
-
-
 }
