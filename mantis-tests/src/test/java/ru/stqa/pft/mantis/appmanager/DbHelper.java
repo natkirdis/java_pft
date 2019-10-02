@@ -5,8 +5,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import ru.stqa.pft.mantis.model.UserData;
-import ru.stqa.pft.mantis.model.Users;
+import ru.stqa.pft.mantis.models.UserData;
+import ru.stqa.pft.mantis.models.Users;
 
 import java.util.List;
 
@@ -18,14 +18,14 @@ public class DbHelper {
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure()
             .build();
-    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
+    sessionFactory = new MetadataSources( registry ).buildMetadata().buildSessionFactory();
 
   }
 
-  public Users usersExceptAdmin() {
+  public Users users() {
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<UserData> result = session.createQuery("from UserData where username != 'administrator'").list();
+    List<UserData> result = session.createQuery("from UserData").list();
     for (UserData user : result) {
       System.out.println(user);
     }

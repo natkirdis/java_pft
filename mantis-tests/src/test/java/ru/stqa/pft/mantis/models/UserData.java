@@ -1,6 +1,4 @@
-package ru.stqa.pft.mantis.model;
-
-import com.thoughtworks.xstream.annotations.XStreamAlias;
+package ru.stqa.pft.mantis.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Objects;
 
-@XStreamAlias("user")
+//@XStreamAlias("user")
 @Entity
 @Table(name = "mantis_user_table")
 

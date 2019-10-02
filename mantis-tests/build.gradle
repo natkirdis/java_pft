@@ -11,32 +11,17 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.testng:testng:7.0.0-beta7'
-    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0-alpha-2'
+    implementation 'org.testng:testng:6.14.3'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
     implementation 'org.hamcrest:hamcrest:2.1'
     implementation 'org.apache.httpcomponents:httpclient:4.5.10'
     implementation 'commons-net:commons-net:3.6'
     implementation 'org.subethamail:subethasmtp:3.1.7'
     implementation 'ru.lanwen.verbalregex:java-verbal-expressions:1.6'
-    implementation 'ch.qos.logback:logback-classic:1.3.0-alpha4'
-    implementation 'mysql:mysql-connector-java:8.0.17'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'org.hibernate:hibernate-core:5.4.4.Final'
-}
-
-task {
-    useTestNG {
-        suites 'src/test/resources/testng-groups.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty('browser', "${browser}")
-    }
-    if (project.hasProperty('target')) {
-        systemProperty('target', "${target}")
-    }
-
-    if (project.hasProperty('verifyUI')) {
-        systemProperty('verifyUI', "${verifyUI}")
-    }
+    implementation 'mysql:mysql-connector-java:8.0.17'
+    implementation 'org.jboss.logging:jboss-logging:3.4.1.Final'
 }
 
 test {

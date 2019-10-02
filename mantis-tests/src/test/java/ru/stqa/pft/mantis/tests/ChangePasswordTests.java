@@ -5,7 +5,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.lanwen.verbalregex.VerbalExpression;
-import ru.stqa.pft.mantis.model.MailMessage;
+import ru.stqa.pft.mantis.models.MailMessage;
+import ru.stqa.pft.mantis.models.UserData;
 
 import java.util.List;
 
@@ -18,27 +19,24 @@ public class ChangePasswordTests extends TestBase {
 
   @Test
   public void testRegistration() throws Exception {
-    String user = "user1569183796749";
-    String password = "password";
-    String email = "user1569183796749@localhost.localdomain";
     String newPassword = "newpassword";
 
+    UserData user = app.db().users().iterator().next();
 
     app.change().loginUI(app.getProperty("web.adminLogin"),app.getProperty("web.adminPassword"));
     app.change().password(user);
 
     List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
-    String confirmationLink = findConfirmationLink(mailMessages, email);
+    String confirmationLink = findConfirmationLink(mailMessages, user.getEmail());
 
-    app.change().finish(confirmationLink, user, newPassword);
-    app.newSession().login(user, password);
-    Assert.assertTrue(app.newSession().login(user, newPassword));
+    app.change().finish(confirmationLink, user.getUserName(), newPassword);
+    Assert.assertTrue(app.newSession().login(user.getUserName(), newPassword));
   }
 
-  private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
+  public String findConfirmationLink(List<MailMessage> mailMessages, String email) {
     MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
-    VerbalExpression regex = VerbalExpression.regex()
-            .find("http://").nonSpace().oneOrMore().build();
+    VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
+    regex.getText(mailMessage.text);
     return regex.getText(mailMessage.text);
   }
 
