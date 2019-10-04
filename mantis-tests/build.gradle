@@ -22,6 +22,7 @@ dependencies {
     implementation 'org.hibernate:hibernate-core:5.4.4.Final'
     implementation 'mysql:mysql-connector-java:8.0.17'
     implementation 'org.jboss.logging:jboss-logging:3.4.1.Final'
+    implementation 'biz.futureware.mantis:mantis-axis-soap-client:1.2.19'
 }
 
 test {
