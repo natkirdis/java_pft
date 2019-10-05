@@ -61,6 +61,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.protobuf:protobuf-java:3.6.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-core:5.4.4.Final" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: biz.futureware.mantis:mantis-axis-soap-client:1.2.19" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: org.apache.axis:axis-jaxrpc:1.4" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="mantis-tests.main" />
 </module>
